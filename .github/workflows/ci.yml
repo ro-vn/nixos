@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: build ${{ matrix.host }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - host: n100
+            os: ubuntu-latest
+            target: nixosConfigurations.n100.config.system.build.toplevel
+          - host: macbook
+            os: macos-latest
+            target: darwinConfigurations.macbook.system
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      # Optional binary cache to speed up builds. FlakeHub Cache is the current
+      # Determinate replacement for the retired magic-nix-cache; requires a
+      # FlakeHub token/permissions. Uncomment to enable.
+      # - uses: DeterminateSystems/flakehub-cache-action@main
+
+      - name: Flake check (eval)
+        run: nix flake check --no-build
+
+      - name: Build ${{ matrix.host }}
+        run: nix build --print-build-logs ".#${{ matrix.target }}"

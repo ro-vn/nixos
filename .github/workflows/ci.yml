@@ -12,12 +12,20 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - host: n100
-            os: ubuntu-latest
-            target: nixosConfigurations.n100.config.system.build.toplevel
+          # Both Macs are aarch64-darwin; macos-latest runners are Apple Silicon.
+          - host: macmini
+            os: macos-latest
+            target: darwinConfigurations.macmini.system
           - host: macbook
             os: macos-latest
             target: darwinConfigurations.macbook.system
+          # rpi5 is aarch64-linux, so this needs an ARM runner — free for public
+          # repos, paid for private ones. Note `nix flake check` ignores
+          # `homeConfigurations` (not a standard flake output), so dropping this
+          # entry means the Pi's config is not verified in CI at all.
+          - host: rpi5
+            os: ubuntu-24.04-arm
+            target: homeConfigurations.rpi5.activationPackage
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4

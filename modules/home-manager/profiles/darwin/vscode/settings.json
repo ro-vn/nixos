@@ -1,0 +1,40 @@
+{
+  "deno.enable": true,
+  "deno.lint": true,
+  "deno.unstable": true,
+  "editor.formatOnSave": true,
+  "vim.easymotion": true,
+  "vim.overrideCopy": false,
+  "vim.useCtrlKeys": false,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": false,
+  "vim.hlsearch": true,
+  "vim.handleKeys": {
+    "<C-d>": true,
+    "<C-s>": false,
+    "<C-z>": false
+  },
+  "vim.insertModeKeyBindings": [
+    { "before": ["j", "j"], "after": ["<Esc>"] }
+  ],
+  "vim.normalModeKeyBindings": [
+    { "before": ["space"], "commands": ["editor.action.marker.next"] },
+    { "before": ["<leader>", "space"], "commands": ["editor.action.marker.previous"] }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    { "before": ["<leader>", "d"], "after": ["d", "d"] },
+    { "before": ["<C-n>"], "commands": [":nohl"] },
+    { "before": ["K"], "commands": ["lineBreakInsert"], "silent": true }
+  ],
+  "vim.visualModeKeyBindings": [
+    { "before": [">"], "commands": ["editor.action.indentLines"] },
+    { "before": ["<"], "commands": ["editor.action.outdentLines"] }
+  ],
+  "vim.operatorPendingModeKeyBindingsNonRecursive": [
+    { "before": ["("], "after": ["i("] }
+  ],
+  "vim.leader": ",",
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1
+  }
+}

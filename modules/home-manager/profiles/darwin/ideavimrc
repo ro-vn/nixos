@@ -1,0 +1,41 @@
+" .ideavimrc — IdeaVim configuration (reproduced from SETUP.md)
+" Command reference: https://jb.gg/h38q75
+
+set scrolloff=5
+set incsearch
+set relativenumber
+
+" dia daa cia caa
+set argtextobj
+
+let mapleader = ","
+
+" Leader-based action shortcuts
+map <Leader>r :action RenameElement<CR>
+map s <Action>(SelectIn)
+map <Leader>s <Action>(FileStructurePopup)
+map <Leader>S <Action>(StructuralSearchActions)
+map <Leader>i <Action>(GotoImplementation)
+map <Leader>m <Action>(GotoImplementation)
+map <Leader>e <Action>(ShowErrorDescription)
+map <Leader>f <Action>(FindUsages)
+map <Leader>F <Action>(HighlightUsagesInFile)
+map <Leader>g <Action>(Generate)
+
+" Space jumps to next error/issue; Leader-Space to previous
+map <Space> <Action>(GotoNextError)
+map <Leader><Space> <Action>(GotoPreviousError)
+
+map g; <Action>(JumpToLastChange)
+map g, <Action>(JumpToNextChange)
+map <C-k> <Action>(EditorSelectWord)
+
+imap jj <Esc>
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" --- IdeaVim plugins: https://jb.gg/ideavim-plugins ---
+Plug 'machakann/vim-highlightedyank'
+Plug 'tpope/vim-commentary'
